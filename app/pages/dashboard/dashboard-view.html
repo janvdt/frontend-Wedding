@@ -1,0 +1,106 @@
+<div class="dashboard main">
+	<div class="quick-access large-12 columns" ng-controller="dashboardController">
+		<div class="top">
+			<h2>Dashboard</h2>
+			<hr class="divider"></hr>
+		</div>
+		<div class="large-12 columns no-pad-left">
+			<div class="medium-6 columns no-pad-left">
+				<h5>{{currentuser.firstName}} {{currentuser.lastName}}</h5>
+			<div class="large-6 columns no-pad-left user-profile">
+				<a href="" ng-if="currentuser.userImage.path != null"  class="user-image" style="background-image: url({{currentuser.userImage.path}})"></a>
+				<a href="" ng-if="currentuser.userImage.path == null"  class="user-image" style="background-image: url('assets/img/dummy-user.png')"></a>
+			</div>
+		</div>
+		<div has-permission='USER_ADMIN' class="large-5 columns no-pad-right users-added">
+			<h4><b>{{newestusers.length}}</b> {{translation.USERS}} {{translation.ADDED_THIS_MONTH}}</h4>
+			<hr class="divider" />
+			<div class="table-holder large-12">
+				<table cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr ng-repeat="newuser in newestusers">
+							<td>{{newuser.firstName}} {{newuser.lastName}}</td>
+							<td class="date">
+	    						<span>{{newuser.created | date:'medium'}}</span><br>
+	    					</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div has-permission='USER_ADMIN' class="platform-activity large-12 columns">
+		<div class="controls">
+			<div class="large-6 columns">
+				<h3>{{translation.LATEST_PLATFORM_ACTIVITY}}</h3>
+			</div>
+			<div class="large-6 columns pagination">
+				<ul>
+					<li class="active">1</li>
+					<li>2</li>
+					<li>3</li>
+				</ul>
+			</div>
+			<hr class="divider"></hr>
+		</div>
+		<div class="table-holder large-12">
+			<table cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr ng-repeat="activity in (filteredItems = (newestActivity | orderBy: 'created' | limitTo: 20))">
+						<td ng-if="activity.firstName != null">Gebruiker <a href="#users">{{activity.firstName}}</a> is aangemaakt</td>
+						<p>{{activity.driver}}</p>
+						<td ng-if="activity.driver != null">Invoer apparaat <a href="#devices">{{activity.name}}</a> is aangemaakt</td>
+						<td ng-if="activity.completed != null"><a href="#users">{{activity.user.firstName}} {{activity.user.lastName}}</a><a href="#reports"> deed de test {{activity.specification.name}}</a>  met inputdevice <a href="#devices">{{activity.specification.inputDevice.name}}</a></td>
+						<td class="date"><span>{{activity.created | date:'medium'}}</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div has-permission='TESTER' class="quick-access large-12 columns" ng-controller="dashboardController">
+		<div class="top">
+			<hr class="divider"></hr>
+			<p> Here you have an overview of tests selected for you</p>
+			<h2>Available Tests</h2>
+			<hr class="divider"></hr>
+		</div>
+	</div>
+	<div has-permission='TESTER' class="table-holder large-12">
+			<table cellspacing="0" cellpadding="0">
+				<thead>
+					<tr>
+						<th has-permission='TEST_ADMIN' class="check-all"><input id="checkbox1" type="checkbox"></th>
+						<th>{{translation.NAME}}</th>
+						<th>{{translation.DEV}}</th>
+						<th>{{translation.INFO}}</th>
+						<th>{{translation.TARGETS}}</th>
+						<th>{{translation.HYSTERESIS}}</th>
+						<th>{{translation.THRESHOLD}}</th>
+						<th>{{translation.AMPLITUDE}}</th>
+						<th>{{translation.WIDTH}}</th>
+						<th class="actions">{{translation.ACTIONS}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr dir-paginate="test in tests | filter: test_query | itemsPerPage: 25">
+						<td><input id="checkbox1" type="checkbox"></td>
+						<td>{{test.name}}</td>
+						<td>{{test.inputDevice.name}}</td>
+						<td>{{test.info}}</td>
+						<td>{{test.numberOfTargets}}</td>
+						<td>{{test.spacialHysteresis}}</td>
+						<td>{{test.errorThreshold}}</td>
+						<td>{{test.targetAmplitudesInPixels}}</td>
+						<td>{{test.targetWidthsInPixels}}</td>
+						<td class="actions">
+							<div>
+								<a href="#/tests/{{test.uuid}}" class="play" id="startTest" ></a> 
+								<a has-permission='TEST_ADMIN' href="" class="edit" ng-click="setTestToEdit(test.uuid); showLightbox('edit-test');" id="editTest"></a> 
+								<a has-permission='TEST_ADMIN' href="" class="delete" ng-click="deleteTest(test.uuid, test.name);" id="deleteTest"></a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div> 
+</div>

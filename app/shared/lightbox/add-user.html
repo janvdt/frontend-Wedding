@@ -1,0 +1,86 @@
+<div class="add-user content animated slideInUp" ng-controller="userController">
+	<span class="close-lightbox" ng-click="closeLightbox()">X</span>
+	<h3>Add user</h3>
+	<hr class="divider" />
+	<p>Fill out the form bellow to add a user.</p>
+	<form role="form" name="form" ng-submit="addUser()" id="adduserform">
+		<div class="large-6 columns no-pad-left">
+			<div class="user-image-cont">
+				<a href="" ng-if="imageUuid.path != undefined"  class="user-image" style="background-image: url({{imageUuid.path}})"></a>
+				<a href="" ng-if="imageUuid.path == undefined" class="user-image" style="background-image: url('assets/img/dummy-user.png')"></a>
+				<div ng-if="imageUuid == undefined" ng-app="fileUpload" ng-controller="userController" class="upload">
+  					<div class="button img-upload alert tiny" ngf-select="upload($file)">Upload image</div>
+				</div>
+				<div ng-if="imageUuid != undefined" ng-app="fileUpload" ng-controller="deviceController" class="upload change">
+  					<a href="" class="delete button img-upload alert tiny" ng-click="deleteImage(imageUuid.uuid)" id="deleteImage">Delete image</a>
+				</div>
+			</div>
+		</div>
+		<div class="large-6 columns no-pad">
+			<div class="large-12 columns no-pad">
+				<div class="form-group large-6 columns no-pad-left">
+					<label for="firstname" style="background-image: url('assets/img/account.png')" tooltip title="firstname"></label>
+					<input type="text" id="firstname" name="firstname" placeholder="firstname" ng-model="newUser.firstName" required="" tabindex=1 />
+					<div ng-show="form.$submitted || form.firstname.$touched" class="ng-error">
+						<span ng-show="form.firstname.$error.required">please provide a firstname</span>
+					</div>
+				</div>
+				<div class="form-group large-6 columns no-pad">
+					<label for="lastname" style="background-image: url('assets/img/account.png')" tooltip title="lastname"></label>
+					<input type="text" id="lastname" name="lastname" placeholder="lastname" ng-model="newUser.lastName" required="" tabindex=2 />
+					<div ng-show="form.$submitted || form.lastname.$touched" class="ng-error">
+						<span ng-show="form.lastname.$error.required">please provide a lastname</span>
+					</div>
+				</div>
+			</div>
+			<div class="large-12 columns no-pad">
+				<div class="form-group large-6 columns no-pad-left">
+					<label for="password" style="background-image: url('assets/img/password.png')" tooltip title="password"></label>
+					<input type="password" id="password" name="password" placeholder="password" ng-model="newUser.password" required="" tabindex=3 />
+					<div ng-show="form.$submitted || form.password.$touched" class="ng-error">
+						<span ng-show="form.password.$error.required">please provide a password</span>
+					</div>
+				</div>
+				<div class="form-group large-6 columns no-pad">
+					<label for="password-accepted" style="background-image: url('assets/img/password.png')" tooltip title="password"></label>
+					<input type="password" id="password-accepted" name="password-accepted" placeholder="retype password" ng-model="newUser.passwordHash" required="" tabindex=4 />
+					<div ng-show="form.$submitted || form.password-accepted.$touched" class="ng-error">
+						<span ng-show="form.password-accepted.$error.required">please repeat your password</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group large-12 columns no-pad">
+				<label for="birthday" style="background-image: url('assets/img/calender.png')" tooltip title="date of birth"></label>
+				<input type="text" id="birthday" name="birthday" placeholder="date of birth" ng-model="newUser.dateofbirth" required="" tabindex=5/>
+				<div ng-show="form.$submitted || form.birthday.$touched" class="ng-error">
+					<span ng-show="form.birthday.$error.required">please provide a birthday</span>
+				</div>
+			</div>
+			<div class="form-group large-12 columns no-pad">
+				<label for="email" style="background-image: url('assets/img/email.png')" tooltip title="email"></label>
+				<input type="email" id="email" name="email" placeholder="email" ng-model="newUser.loginEmail" required="" tabindex=6 />
+				<div ng-show="form.$submitted || form.email.$touched" class="ng-error">
+					<span ng-show="form.email.$error.required">please provide an email</span>
+					<span ng-show="form.email.$error.email">this is not a valid email</span>
+				</div>
+			</div>
+			<div class="form-group large-12 columns no-pad">
+				<label for="phone" style="background-image: url('assets/img/telephone.png')" tooltip title="phone"></label>
+				<input type="tel" id="phone" name="phone" placeholder="phone" ng-model="newUser.phone" required=""  tabindex=7 />
+				<div ng-show="form.$submitted || form.phone.$touched" class="ng-error">
+					<span ng-show="form.phone.$error.required">please provide a phone number</span>
+				</div>
+			</div>
+			<div class="form-group large-12 columns no-pad">
+				<label for="roles" style="background-image: url('assets/img/users.png')" tooltip title="roles"></label>
+				<div isteven-multi-select input-model="roles" output-model="selectedRoles" item-label="name" tick-property="ticked" button-label="name" translation="dropDownOptions"></div>
+			</div>
+			<div class="buttons columns no-pad large-12">
+				<div>
+					<button type="submit" class="button success tiny" id="saveUser">save</button>
+					<button type="reset" class="button alert tiny">cancel</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

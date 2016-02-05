@@ -1,0 +1,68 @@
+<div class="edit-user content animated slideInUp" ng-controller="userController">
+	<span class="close-lightbox" ng-click="closeLightbox()">X</span>
+	<h3>Edit user</h3>
+	<hr class="divider" />
+	<p>You can edit the user values bellow.</p>
+	<form role="form" name="form" ng-submit="editUser(userToEdit.uuid)">
+		<div class="large-6 columns no-pad-left">
+			<div class="user-image-cont">
+				<a href="" ng-if="imageUuid.path != undefined"  class="user-image" style="background-image: url({{imageUuid.path}})"></a>
+				<a href="" ng-if="imageUuid.path == undefined" class="user-image" style="background-image: url('assets/img/dummy-user.png')"></a>
+				<div ng-if="imageUuid == undefined" ng-app="fileUpload" ng-controller="userController" class="upload">
+  					<div class="button img-upload alert tiny" ngf-select="upload($file)" output-model="deviceToEdit.userImage">Upload image</div>
+				</div>
+				<div ng-if="imageUuid != undefined" ng-app="fileUpload" ng-controller="userController" class="upload change">
+  					<a href="" class="button img-upload alert tiny change" ngf-select="upload($file)" output-model="deviceToEdit.userImage" id="">Upload New</a>
+				</div>
+			</div>
+		</div>
+		<div class="large-6 columns no-pad">
+			<div class="form-group">
+				<label for="firstName" style="background-image: url('assets/img/account.png')" tooltip title="firstname"></label>
+				<input type="text" id="firstName" name="firstName" placeholder="firstname" ng-model="userToEdit.firstName" required=""tabindex=1 />
+				<div ng-show="form.$submitted || form.firstName.$touched" class="ng-error">
+					<span ng-show="form.firstName.$error.required">please provide a firstname</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lastName" style="background-image: url('assets/img/account.png')" tooltip title="lastname"></label>
+				<input type="text" id="lastName" name="lastName" placeholder="lastname" ng-model="userToEdit.lastName" required="" tabindex=2 />
+				<div ng-show="form.$submitted || form.lastName.$touched" class="ng-error">
+					<span ng-show="form.lastName.$error.required">please provide a lastname</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="loginEmail" style="background-image: url('assets/img/email.png')" tooltip title="email"></label>
+				<input type="email" id="loginEmail" name="loginEmail" placeholder="email" ng-model="userToEdit.loginEmail" required="" tabindex=3 />
+				<div ng-show="form.$submitted || form.loginEmail.$touched" class="ng-error">
+					<span ng-show="form.loginEmail.$error.required">please provide an email</span>
+					<span ng-show="form.loginEmail.$error.email">this is not a valid email</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="birthday" style="background-image: url('assets/img/calender.png')" tooltip title="date of birth"></label>
+				<input type="text" id="birthday" name="birthday" placeholder="date of birth" required="" tabindex=4 ng-model="userToEdit.dateofbirth" />
+				<div ng-show="form.$submitted || form.birthday.$touched" class="ng-error">
+					<span ng-show="form.birthday.$error.required">please provide a birthday</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="phone" style="background-image: url('assets/img/telephone.png')" tooltip title="phone"></label>
+				<input type="tel" id="phone" name="phone" placeholder="phone" required=""  tabindex=5 ng-model="userToEdit.phone"/>
+				<div ng-show="form.$submitted || form.phone.$touched" class="ng-error">
+					<span ng-show="form.phone.$error.required">please provide a phone number</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="permissions" style="background-image: url('assets/img/users.png')" tooltip title="permissions"></label>
+				<div isteven-multi-select input-model="selectedRolesEdit" output-model="userToEdit.roles" item-label="name" tick-property="selected" button-label="name" translation="dropDownOptions"></div>
+			</div>
+			<div class="buttons">
+				<div>
+					<button type="submit" class="button success tiny" id="saveEditUser" >save</button>
+					<button type="reset" class="button alert tiny">cancel</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

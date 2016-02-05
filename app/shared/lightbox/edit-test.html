@@ -1,0 +1,69 @@
+<div class="add-test content animated slideInUp" ng-controller="testController">
+	<span class="close-lightbox" ng-click="closeLightbox()">X</span>
+	<h3>Edit test</h3>
+	<hr class="divider" />
+	<p>you can edit the test values below.</p>
+	<form role="form" name="form" ng-submit="editTest(testToEdit.uuid)" id="edittestform">
+		<div class="large-6 columns no-pad-left">
+			<div class="form-group">
+				<label for="name" style="background-image: url('assets/img/tag.png')" tooltip title="name"></label>
+				<input type="text" id="name" name="name" placeholder="name" ng-model="testToEdit.name" required="" tabindex=1 />
+				<div ng-show="form.$submitted || form.name.$touched" class="ng-error">
+					<span ng-show="form.name.$error.required">please provide a name</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="devices" style="background-image: url('assets/img/input.png')" tooltip title="devices"></label>
+				<div isteven-multi-select input-model="devicesToEdit" output-model="testToEdit.inputDevice" item-label="name" tick-property="selected" button-label="name" translation="dropDownOptions" selection-mode="single" tabindex=3></div>
+			</div>
+			<div class="form-group">
+				<label for="numberOfTargets" style="background-image: url('assets/img/target.png')" tooltip title="targets"></label>
+				<input type="text" id="numberOfTargets" name="numberOfTargets" placeholder="number of targets" ng-model="testToEdit.numberOfTargets" required="" tabindex=5 />
+				<div ng-show="form.$submitted || form.numberOfTargets.$touched" class="ng-error">
+					<span ng-show="form.numberOfTargets.$error.required">please set number of targets</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="targetWidthsInPixels" style="background-image: url('assets/img/width.png')" tooltip title="target width"></label>
+				<input type="text" id="targetWidthsInPixels" name="targetWidthsInPixels" placeholder="target width" ng-model="testToEdit.targetWidthsInPixels" required=""tabindex=7 />
+				<div ng-show="form.$submitted || form.targetWidthsInPixels.$touched" class="ng-error">
+					<span ng-show="form.targetWidthsInPixels.$error.required">please set width</span>
+				</div>
+			</div>
+		</div>
+		<div class="large-6 columns no-pad">
+			<div class="form-group">
+				<label for="info" style="background-image: url('assets/img/info.png')" tooltip title="info"></label>
+				<input type="text" id="info" name="info" placeholder="info" ng-model="testToEdit.info" required=""tabindex=2 />
+				<div ng-show="form.$submitted || form.info.$touched" class="ng-error">
+					<span ng-show="form.info.$error.required">please set test info</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="hysteresis" style="background-image: url('assets/img/hysteresis.png')" tooltip title="hysteresis"></label>
+				<input type="text" id="hysteresis" name="hysteresis" placeholder="hysteresis" ng-model="testToEdit.spacialHysteresis" required="" tabindex=4 />
+				<div ng-show="form.$submitted || form.hysteresis.$touched" class="ng-error">
+					<span ng-show="form.hysteresis.$error.required">please set hysteresis</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="errorThreshold" style="background-image: url('assets/img/error.png')" tooltip title="error threshold"></label>
+				<input type="text" id="errorThreshold" name="errorThreshold" placeholder="error threshold" ng-model="testToEdit.errorThreshold" required=""tabindex=6 />
+				<div ng-show="form.$submitted || form.errorThreshold.$touched" class="ng-error">
+					<span ng-show="form.errorThreshold.$error.required">please set error threshold</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="targetAmplitudesInPixels" style="background-image: url('assets/img/amplitude.png')" tooltip title="target amplitudes"></label>
+				<input type="text" id="targetAmplitudesInPixels" name="targetAmplitudesInPixels" placeholder="target amplitude" ng-model="testToEdit.targetAmplitudesInPixels" required=""tabindex=8 />
+				<div ng-show="form.$submitted || form.targetAmplitudesInPixels.$touched" class="ng-error">
+					<span ng-show="form.targetAmplitudesInPixels.$error.required">please set target amplitude</span>
+				</div>
+			</div>
+		</div>
+		<div class="large-12 columns no-pad buttons">
+			<button type="submit" class="button success tiny" id="saveTest" id="saveEditTest">save</button>
+			<button type="reset" class="button alert tiny">cancel</button>
+		</div>
+	</form>
+</div>

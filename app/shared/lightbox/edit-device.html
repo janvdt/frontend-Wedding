@@ -1,0 +1,63 @@
+<div class="add-device content animated slideInUp" ng-controller="deviceController">
+	<span class="close-lightbox" ng-click="closeLightbox()">X</span>
+	<h3>Edit device</h3>
+	<hr class="divider" />
+	<p>You can edit the device values bellow.</p>
+	<form role="form" name="form" ng-submit="editDevice(deviceToEdit.uuid)">
+		<div class="large-6 columns no-pad-left">
+			<div class="user-image-cont">
+				<a href="" ng-if="imageUuid.path != undefined"  class="user-image" style="background-image: url({{imageUuid.path}})"></a>
+				<a href="" ng-if="imageUuid.path == undefined" class="user-image" style="background-image: url('assets/img/dummy-device.png')"></a>
+				<div ng-if="imageUuid == undefined" ng-app="fileUpload" ng-controller="deviceController" class="upload">
+  					<div class="button img-upload alert tiny" ngf-select="upload($file)" output-model="deviceToEdit.inputDeviceImage">Upload image</div>
+				</div>
+				<div ng-if="imageUuid != undefined" ng-app="fileUpload" ng-controller="deviceController" class="upload">
+  					<a href="" class="button delete img-upload alert tiny" ngf-select="upload($file)" output-model="deviceToEdit.inputDeviceImage" id="">Upload New</a>
+				</div>
+			</div>
+		</div>
+		<div class="large-6 columns no-pad">
+			<div class="form-group">
+				<label for="name" style="background-image: url('assets/img/tag.png')" tooltip title="name"></label>
+				<input type="text" id="name" name="name" placeholder="name" ng-model="deviceToEdit.name" required=""tabindex=1 />
+				<div ng-show="form.$submitted || form.name.$touched" class="ng-error">
+					<span ng-show="form.name.$error.required">please provide a name</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="type" style="background-image: url('assets/img/settings.png')" tooltip title="type"></label>
+				<input type="text" id="type" name="type" placeholder="type" ng-model="deviceToEdit.type" required="" tabindex=2 />
+				<div ng-show="form.$submitted || form.type.$touched" class="ng-error">
+					<span ng-show="form.type.$error.required">please provide a type</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="driver" style="background-image: url('assets/img/driver.png')" tooltip title="driver"></label>
+				<input type="text" id="driver" name="driver" placeholder="driver" ng-model="deviceToEdit.driver" required="" tabindex=3 />
+				<div ng-show="form.$submitted || form.driver.$touched" class="ng-error">
+					<span ng-show="form.driver.$error.required">please provide a driver</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="driverUrl" style="background-image: url('assets/img/link.png')" tooltip title="driver url"></label>
+				<input type="text" id="driverUrl" name="driverUrl" placeholder="driver url" ng-model="deviceToEdit.driverUrl" required="" tabindex=4 />
+				<div ng-show="form.$submitted || form.driverUrl.$touched" class="ng-error">
+					<span ng-show="form.driverUrl.$error.required">please provide a driver url/span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="info" style="background-image: url('assets/img/info.png')" tooltip title="info"></label>
+				<input type="text" id="info" name="info" placeholder="info" ng-model="deviceToEdit.info" required="" tabindex=5 />
+				<div ng-show="form.$submitted || form.info.$touched" class="ng-error">
+					<span ng-show="form.info.$error.required">please provide info</span>
+				</div>
+			</div>
+			<div class="large-12 columns no-pad buttons">
+				<div>
+					<button type="submit" class="button success tiny" id="saveEditDevice">save</button>
+					<button type="reset" class="button alert tiny">cancel</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,18 @@
+<div class="logo">
+	<span class="idt">idt</span><span class="idt-mngr">manager</span>
+</div>
+
+<div ng-controller="navigationController" class="container">
+
+<ul class="side-nav" ng-controller="navigationController">
+	<li ng-class="{active:isActive('/dashboard')}" ng-show="authenticated"><a href="#dashboard" id="dashboard-nav">dashboard</a></li>
+	<li has-permission='USER_ADMIN' ng-class="{active:isActive('/users')}" ng-show="authenticated"><a href="#users" id="users-nav">{{translation.USERS}}</a></li>
+	<li has-permission='DEVICE_ADMIN' ng-class="{active:isActive('/devices')}" ng-show="authenticated"><a href="#devices" id="input-nav">{{translation.DEVS}}</a></li>
+	<li  ng-class="{active:isActive('/tests')}" ng-show="authenticated"><a href="#tests" id="tests-nav">{{translation.TESTS}}</a></li>
+	<li has-permission='TEST_ADMIN' ng-class="{active:isActive('/reports')}" ng-show="authenticated"><a href="#reports" id="reports-nav">{{translation.REPORTS}}</a></li>
+	<li class="divider" ng-show="authenticated"></li>
+	<li ng-class="{active:isActive('/account')}" ng-show="authenticated"><a href="#account" id="account-nav">{{translation.MYACC}}</a></li>
+	<li ng-show="authenticated"><a href="#logout" id="logout-nav" ng-click="logout()">{{translation.LOGOUT}}</a></li>
+	<li ng-class="{active:isActive('/login')}" ng-show="!authenticated"><a href="#login" id="logout-nav">{{translation.LOGIN}}</a></li>
+</ul>
+

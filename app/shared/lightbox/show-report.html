@@ -1,0 +1,195 @@
+<div class="show-report content animated slideInUp" ng-controller="reportController">
+	<span class="close-lightbox" ng-click="closeLightbox()">X</span>
+	<h3>Testreport for {{reportToShow.specification.name}}</h3>
+	<hr class="divider" />
+	<p>You can find the results and the test specifications below.</p>
+	<div class="scrollable">
+		<div class="large-12 columns no-pad">
+			<div class="large-4 columns no-pad">
+				<div class="user-image-cont">
+					<div ng-if="reportToShow.user.userImage.path != undefined"  class="user-image" style="background-image: url({{reportToShow.user.userImage.path}})"></div>
+					<div ng-if="reportToShow.user.userImage.path == undefined" class="user-image" style="background-image: url('assets/img/dummy-user.png')"></div>
+				</div>
+			</div>
+			<div class="large-8 columns">
+				<div class="large-6 columns no-pad">
+					<h5>User</h5>
+					<div class="setting-group">
+						<span class="icon" style="background-image: url('assets/img/account.png')"></span>
+						<span class="test-settings">{{reportToShow.user.firstName}} {{reportToShow.user.lastName}}</span>
+					</div>
+					<div class="setting-group">
+						<span class="icon" style="background-image: url('assets/img/email.png')"></span>
+						<span class="test-settings">{{reportToShow.user.loginEmail}}</span>
+					</div>
+					<div class="setting-group">
+						<span class="icon" style="background-image: url('assets/img/calender.png')"></span>
+						<span class="test-settings">{{reportToShow.user.dateofbirth}}</span>
+					</div>
+					<div class="setting-group">
+						<span class="icon" style="background-image: url('assets/img/telephone.png')"></span>
+						<span class="test-settings">{{reportToShow.user.phone}}</span>
+					</div>
+				</div>
+				<div class="large-6 columns no-pad-right">
+					<h5>Device</h5>
+					<div class="setting-group">
+						<span class="icon" style="background-image: url('assets/img/tag.png')"></span>
+						<span class="test-settings">{{reportToShow.specification.inputDevice.name}}</span>
+					</div>
+					<div class="setting-group">
+						<span class="icon" style="background-image: url('assets/img/settings.png')"></span>
+						<span class="test-settings">{{reportToShow.specification.inputDevice.type}}</span>
+					</div>
+					<div class="setting-group">
+						<span class="icon" style="background-image: url('assets/img/driver.png')"></span>
+						<span class="test-settings">{{reportToShow.specification.inputDevice.driver}}</span>
+					</div>
+					<div class="setting-group">
+						<span class="icon" style="background-image: url('assets/img/info.png')"></span>
+						<span class="test-settings">{{reportToShow.specification.inputDevice.info}}</span>
+					</div>
+				</div>
+				<div class="large-12 columns test no-pad">
+					<h5>Test Specifications</h5>
+					<div class="large-6 columns no-pad">
+						<div class="setting-group">
+							<span class="icon" style="background-image: url('assets/img/target.png')"></span>
+							<span class="test-settings">number of targets: </span><span><b id="numberOfTargets">{{reportToShow.specification.numberOfTargets}}</b></span>
+						</div>
+						<div class="setting-group">
+							<span class="icon" style="background-image: url('assets/img/email.png')"></span>
+							<span class="test-settings">error threshold: </span><span><b>{{reportToShow.specification.errorThreshold}}</b></span>
+						</div>
+					</div>
+					<div class="large-6 columns no-pad-right">
+						<div class="setting-group">
+							<span class="icon" style="background-image: url('assets/img/width.png')"></span>
+							<span class="test-settings">target width: </span><span><b>{{reportToShow.specification.targetWidthsInPixels}}</b></span>
+						</div>
+						<div class="setting-group">
+							<span class="icon" style="background-image: url('assets/img/amplitude.png')"></span>
+							<span class="test-settings">target amplitude: </span><span><b>{{reportToShow.specification.targetAmplitudesInPixels}}</b></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="large-12 columns no-pad result">
+				<h3>Results</h3>
+				<hr class="divider" />
+				<div ng-repeat="result in reportToShow.inputTests">
+					<h5>Sequence X</h5>
+					<div class="large-12 columns no-pad specs">
+						<div class="large-3 columns no-pad">
+							<span class="icon" style="background-image: url('assets/img/time.png')"></span>
+							<span class="test-settings">start time: </span><span>{{result.startTime}}</span>
+						</div>
+						<div class="large-3 columns no-pad">
+							<span class="icon" style="background-image: url('assets/img/time.png')"></span>
+							<span class="test-settings">end time: </span><span>{{result.endTime}}</span>
+						</div>
+						<div class="large-3 columns no-pad">
+							<span class="icon" style="background-image: url('assets/img/width.png')"></span>
+							<span class="test-settings">target width: </span><span>{{result.targetWidthInPixels}} px</span>
+						</div>
+						<div class="large-3 columns no-pad">
+							<span class="icon" style="background-image: url('assets/img/amplitude.png')"></span>
+							<span class="test-settings">target amplitude: </span><span>{{result.targetAmplitudeInPixels}} px</span>
+						</div>
+					</div>
+					<div class="large-12 columns no-pad metrics">
+						<div class="large-6 columns no-pad">
+							<h5>Dimensions</h5>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/delta.png')"></span>
+								<span class="test-settings">delta x </span><span>{{result.metrics.deltaXinPixels}} px</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/amplitude.png')"></span>
+								<span class="test-settings">effective amplitude </span><span>{{result.metrics.effectiveAmplitude}} px</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/width.png')"></span>
+								<span class="test-settings">effective target width </span><span>{{result.metrics.effectiveTargetWidthInPixels}} px</span>
+							</div>
+						</div>
+						<div class="large-6 columns no-pad">
+							<h5>Dificulty</h5>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/difficulty.png')"></span>
+								<span class="test-settings">index of difficulty </span><span>{{result.metrics.indexOfDifficultyInBits}} bits</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/difficulty.png')"></span>
+								<span class="test-settings">effective difficulty </span><span>{{result.metrics.effectiveIndexOfDifficultyInBits}} bits</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/error.png')"></span>
+								<span class="test-settings">error rate </span><span>{{result.metrics.errorRatePercentage}} %</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/error.png')"></span>
+								<span class="test-settings">effective error </span><span>{{result.metrics.movementErrorInPixels}} px</span>
+							</div>
+						</div>
+					</div>
+					<div class="large-12 columns no-pad metrics">
+						<div class="large-6 columns no-pad">
+							<h5>Movement</h5>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/error.png')"></span>
+								<span class="test-settings">movement offset </span><span>{{result.metrics.movementOffsetInPixels}} px</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/movement.png')"></span>
+								<span class="test-settings">movement time </span><span>{{result.metrics.movementTime}}</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/target.png')"></span>
+								<span class="test-settings">number of errors </span><span>{{result.metrics.numberOfErrors}}</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/variability.png')"></span>
+								<span class="test-settings">movement variability </span><span>{{result.metrics.movementVariabilityInPixels}} px</span>
+							</div>
+						</div>
+						<div class="large-6 columns no-pad">
+							<h5>Statistics</h5>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/direction.png')"></span>
+								<span class="test-settings">orthogonal direction changes </span><span>{{result.metrics.orthogonalDirectionChanges}} px</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/pointing.png')"></span>
+								<span class="test-settings">pointing time </span><span>{{result.metrics.pointingTimeInMs}} ms</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/selection.png')"></span>
+								<span class="test-settings">selection time </span><span>{{result.metrics.selectionTimeInMs}} ms</span>
+							</div>
+							<div class="setting-group">
+								<span class="icon" style="background-image: url('assets/img/standard-deviation.png')"></span>
+								<span class="test-settings">standard deviation </span><span>{{result.metrics.standardDeviationInPixels}} px</span>
+							</div>
+						</div>
+					</div>
+					<div class="large-12 columns no-pad metrics">
+						<h5>Throughput</h5>
+						<div class="setting-group">
+							<span class="icon" style="background-image: url('assets/img/target.png')"></span>
+							<span class="test-settings">target reentries </span><span>{{result.metrics.targetReentries}} px</span>
+						</div>
+						<div class="setting-group">
+							<span class="icon" style="background-image: url('assets/img/axis.png')"></span>
+							<span class="test-settings">task axis crossing </span><span>{{result.metrics.taskAxisCrossings}} ms</span>
+						</div>
+						<div class="setting-group">
+							<span class="icon" style="background-image: url('assets/img/difficulty.png')"></span>
+							<span class="test-settings">throughput </span><span>{{result.metrics.throughputInBitsPerSec}} bits/s</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

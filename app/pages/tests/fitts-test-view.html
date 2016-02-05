@@ -1,0 +1,47 @@
+<script src="assets/js/fitts.js" type="text/javascript"></script>
+<div class="test large-12 columns" id="mainController">
+	<div class="top">
+		<h1>{{test.name}}</h1>
+		<hr class="divider" />
+	</div>
+	<div class="display noselect large-12 columns no-pad">
+		<svg width="100%" height="100%" id="svg">
+			<div class="sequence-count-container"><span class="target">SEQUENCE</span><span id="sequence-count"></span><span id="total-sequence-count"></span></div>
+			<div class="count_container"><span class="target">TARGET</span><span id="count">1</span><span id="total_count">/</span></div>
+		</svg>
+	</div>
+	<div class="controls large-12 columns no-pad">
+		<div class="large-6 columns no-pad-left">
+			<h4>Settings</h4>
+			<div class="setting-group">
+				<span class="icon" style="background-image: url('assets/img/target.png')"></span>
+				<span class="test-settings">number of targets: </span><span><b id="numberOfTargets">{{test.numberOfTargets}}</b></span>
+			</div>
+			<div class="setting-group">
+				<span class="icon" style="background-image: url('assets/img/email.png')"></span>
+				<span class="test-settings">error threshold: </span><span><b>{{test.errorThreshold}}</b></span>
+			</div>
+			<div class="setting-group">
+				<span class="icon" style="background-image: url('assets/img/width.png')"></span>
+				<span class="test-settings">target width: </span><span><b>{{test.targetWidthsInPixels}}</b></span>
+			</div>
+			<div class="setting-group">
+				<span class="icon" style="background-image: url('assets/img/amplitude.png')"></span>
+				<span class="test-settings">target amplitude: </span><span><b>{{test.targetAmplitudesInPixels}}</b></span>
+			</div>
+			<div class="large-12 columns no-pad buttons">
+				<div class="form-group">
+					<a href="" class="button tiny success">done</a>
+					<a href="#/tests" class="button tiny alert">stop</a>
+				</div>
+			</div>
+		</div>
+		<div class="large-6 columns no-pad">
+			<h4>Mouse tracking display</h4>	
+			<div class="mouse-move display large-12">	
+				<svg width="100%" height="100%" id="svg-mouse">
+				</svg>
+			</div>
+		</div>
+	</div>
+</div>

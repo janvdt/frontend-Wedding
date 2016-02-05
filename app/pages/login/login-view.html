@@ -1,0 +1,39 @@
+<div class="main login">
+	<div class="large-12">
+		<div class="top">
+			<div class="large-10 columns no-pad">
+				<h2>Login</h2>
+			</div>
+			<hr class="divider"></hr>
+		</div>
+		<div class="large-4 columns no-pad">
+			<form role="loginForm" name="loginForm">
+				<div class="alert alert-danger" ng-show="error">
+					There was a problem logging in. Please try again.
+				</div>
+				<div class="form-group">
+					<label for="username" style="background-image: url('assets/img/account.png')"></label>
+					<input type="text" id="username" name="username" placeholder="username"
+						   ng-model="credentials.username" required=""/>
+
+					<div ng-show="loginForm.username.$touched" class="ng-error">
+						<span ng-show="loginForm.username.$error.required">please provide a username</span>
+						<span ng-show="loginForm.username.$error.email">this is not a valid email</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="password" style="background-image: url('assets/img/password.png')"></label>
+					<input type="password" id="password" name="password" placeholder="password"
+						   ng-model="credentials.password" required=""/>
+
+					<div ng-show="loginForm.password.$touched" class="ng-error">
+						<span ng-show="loginForm.password.$error.required">please provide a password</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<button class="clearfix button success tiny" ng-click="login()">Login</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
