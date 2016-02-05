@@ -1,0 +1,41 @@
+<div class="register-user content animated slideInUp" ng-controller="userController">
+	<span class="close-lightbox" ng-click="closeLightbox()">X</span>
+	<h3>Register user</h3>
+	<hr class="divider" />
+	<p>Fill out the form below to register</p>
+	<form role="form" name="form" ng-submit="registerUser()" id="registeruserform">
+		<div class="large-6 columns no-pad">
+			<div class="large-12 columns no-pad">
+				<div class="form-group large-6 columns no-pad-left">
+					<label for="name" style="background-image: url('assets/img/account.png')" tooltip title="name"></label>
+					<input type="text" id="firstname" name="name" placeholder="name" ng-model="newUser.name" required="" tabindex=1 />
+					<div ng-show="form.$submitted || form.firstname.$touched" class="ng-error">
+						<span ng-show="form.firstname.$error.required">please provide a name</span>
+					</div>
+				</div>
+				<div class="form-group large-6 columns no-pad">
+					<label for="email" style="background-image: url('assets/img/email.png')" tooltip title="email"></label>
+					<input type="text" id="email" name="email" placeholder="email" ng-model="newUser.email" required="" tabindex=2 />
+					<div ng-show="form.$submitted || form.lastname.$touched" class="ng-error">
+						<span ng-show="form.lastname.$error.required">please provide your email</span>
+					</div>
+				</div>
+			</div>
+			<div class="large-12 columns no-pad">
+				<div class="form-group large-6 columns no-pad-left">
+					<label for="password" style="background-image: url('assets/img/password.png')" tooltip title="password"></label>
+					<input type="password" id="password" name="password" placeholder="password" ng-model="newUser.password" required="" tabindex=3 />
+					<div ng-show="form.$submitted || form.password.$touched" class="ng-error">
+						<span ng-show="form.password.$error.required">please provide a password</span>
+					</div>
+				</div>
+			</div>
+			<div class="buttons columns no-pad large-12">
+				<div>
+					<button type="submit" class="button success tiny" id="saveUser">save</button>
+					<button type="reset" class="button alert tiny">cancel</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
