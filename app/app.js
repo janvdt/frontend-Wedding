@@ -1,11 +1,19 @@
 var idtApp = angular.module('idtApp', ['ngRoute', 'ngCookies', 'ngResource', 'ngFileUpload', 'cgNotify', 'angularUtils.directives.dirPagination' , 'isteven-multi-select', "checklist-model"]),permissionList;
 
 //var root = "http://146.175.138.153/tomcat/idt-backend";
-var root ="http://localhost:8082";
+var root ="http://localhost:8000";
+
+
 
 idtApp.config(function($routeProvider, $httpProvider) {
   
-  
+  $httpProvider.defaults.withCredentials = true;
+  // Tough luck: the default cookie-to-header mechanism is not working for cross-origin requests!
+  $httpProvider.defaults.xsrfCookieName = 'CSRF-TOKEN'; // The name of the cookie sent by the server
+  $httpProvider.defaults.xsrfHeaderName = 'X-CSRF-TOKEN'; // The default header name picked up by Spring Security
+  $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+  $httpProvider.interceptors.push('httpRequestInterceptor');
+
   $routeProvider
   .when('/', {
        templateUrl  : 'app/pages/dashboard/dashboard-view.html',
@@ -28,27 +36,33 @@ idtApp.config(function($routeProvider, $httpProvider) {
 
 
 idtApp.controller('mainController', function($rootScope, $cookies, $locale, $scope, $location, $http, notify) {
- 
+
     notify.config({
       position: 'right',
       maximumOpen: 3
     }); 
 	
     $scope.overlays = [
-      { name: 'add-user', url: 'app/shared/lightbox/add-user.html' },
-      { name: 'edit-user', url: 'app/shared/lightbox/edit-user.html' },
-      { name: 'add-device', url: 'app/shared/lightbox/add-device.html' },
-      { name: 'add-role', url: 'app/shared/lightbox/add-role.html' },
-      { name: 'edit-device', url: 'app/shared/lightbox/edit-device.html' },
-      { name: 'edit-role', url: 'app/shared/lightbox/edit-role.html' },
-      { name: 'add-test', url: 'app/shared/lightbox/add-test.html' },
-      { name: 'edit-test', url: 'app/shared/lightbox/edit-test.html' },
-      { name: 'pause-test', url: 'app/shared/lightbox/pause-test.html' },
-      { name: 'stop-test', url: 'app/shared/lightbox/stop-test.html' },
-      { name: 'show-report', url: 'app/shared/lightbox/show-report.html' },
+      { name: 'register-user', url: 'app/shared/lightbox/register-user.html' },
     ];
 
     $scope.$on('$routeChangeStart', function(scope, next, current) {
+
+      var isLoginPage = window.location.href.indexOf("login") != -1;
+      if(isLoginPage){
+        if($cookies.get("access_token")){
+          $rootScope.authenticated = true;
+          $location.path('/dashboard')
+      }
+      }else{
+        if($cookies.get("access_token")){
+          $http.defaults.headers.common.Authorization= 'Bearer ' + $cookies.get("access_token");
+          $rootScope.authenticated = true;
+        }else{
+          $rootScope.authenticated = false;
+          $location.path('/login')
+        }
+      }
       
     });
 
@@ -69,7 +83,6 @@ idtApp.controller('mainController', function($rootScope, $cookies, $locale, $sco
     }
 
     $scope.closeLightbox = function(){
-      $rootScope.imageUuid = null;
       closeLightbox();
     }
 

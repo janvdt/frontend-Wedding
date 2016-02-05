@@ -6,7 +6,7 @@
 
 <ul class="side-nav" ng-controller="navigationController">
 	<li ng-class="{active:isActive('/dashboard')}" ng-show="authenticated"><a href="#dashboard" id="dashboard-nav">dashboard</a></li>
-	<li><a href="#logout" id="logout-nav" ng-click="logout()">Logout</a></li>
-	<li ng-class="{active:isActive('/login')}"><a href="#login" id="logout-nav">Login</a></li>
+	<li><a href="#logout" id="logout-nav" ng-click="logout()" ng-show="authenticated">Logout</a></li>
+	<li ng-class="{active:isActive('/login')}" ng-show="!authenticated"><a href="#login" id="logout-nav">Login</a></li>
 </ul>
 
