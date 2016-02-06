@@ -5,9 +5,10 @@ angular.module('idtApp').factory('httpRequestInterceptor', function ($q, $locati
         'responseError': function(rejection) {
             // do something on error
             if(rejection.status === 404 || rejection.status === 401){
-                //$location.path('/login');                    
+                //console.log(rejection.data.error_description);             
             }
-            //return $q.reject(rejection);
+            //console.log($q.reject(rejection));
+            return $q.reject(rejection);
          }
      };
 });
