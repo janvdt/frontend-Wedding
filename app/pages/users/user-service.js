@@ -8,13 +8,18 @@ idtApp.service('userService', function($http, $q) {
 
   //Get the user that is logged on
   function getcurrentUser(){
-    var request = $http.get(root + '/api');
+    var request = $http.get(root + '/users/current');
+    return (request.then(handleSuccess, handleError));
+  }
+
+  function getFacebookinfo(){
+    var request = $http.get(root + '/users/current');
     return (request.then(handleSuccess, handleError));
   }
 
   //Add new user to the system
   function addUser(user, callback){
-    return $http.post(root + '/register', user).success(
+    return $http.post(root + '/users/register', user).success(
     function(value) {
       return callback(value);
     });

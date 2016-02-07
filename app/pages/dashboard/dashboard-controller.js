@@ -8,6 +8,7 @@ idtApp.controller('dashboardController', function($rootScope, $scope, $q, userSe
 		userService.getcurrentUser().then(function(result)
 		{
 			$scope.currentUser = result;
+			//Log current user
 			console.log($scope.currentUser);
 		});
 		

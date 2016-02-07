@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('idtApp').factory('Login', function ($http, $resource,Cookies, $cookieStore,  $rootScope, $httpParamSerializer, $cookies, $location,notify) {
+angular.module('idtApp').factory('Login', function ($http, $resource,Cookies, $cookieStore,  $rootScope, $httpParamSerializer, $cookies, $location,notify,userService) {
 
 	return {
 		
@@ -35,6 +35,29 @@ angular.module('idtApp').factory('Login', function ($http, $resource,Cookies, $c
 		  		'classes' : 'success'
 		  });
   		});   
+		},
+
+		loginfacebook: function(successHandler, errorHandler) {
+
+
+			$rootScope.data = {grant_type:"facebook_access_token", client_id: '1701132980127151',client_secret: '31049ad0d80797b367260df0961a73a6', facebook_access_token: ''};
+			var req = {
+            	method: 'POST',
+            	url: root + "/oauth/access_token",
+            	headers: {
+                	"Content-type": "application/x-www-form-urlencoded; charset=utf-8"
+            	},
+            	//Serialise Data
+            	data: $httpParamSerializer($rootScope.data)
+
+       		}
+       		$http(req).then(function successCallback (data){
+        	
+        	},function errorCallback(response) {
+			
+			
+  			});   
+
 		},
 
 		

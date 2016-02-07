@@ -17,6 +17,15 @@ idtApp.controller('loginController', function ($rootScope,$httpParamSerializer, 
 		});
 	};
 
+	$scope.facebookLogin = function () {
+		Login.loginfacebook(function (data, status, headers, config) {
+			//Call login Service where the magic happens
+		}, function(data, status, headers, config) {
+			// Failure handler
+			console.error('Something went wrong while trying to login... ', data, status);
+		});
+	};
+
 	function applyRemoteData(){
 		//Dummy function
 	}
